@@ -668,7 +668,7 @@ document.querySelectorAll('.rv').forEach(el=>{el.querySelectorAll('.m,.cm,.bars 
     <button onclick="mzSend('أبي موقع أو متجر لمشروعي')">🌐 أبي موقع</button>
     <button onclick="mzSend('أبي أربط واتساب بالذكاء الاصطناعي')">🤖 واتساب ذكي</button>
     <button onclick="mzSend('بكم الأسعار؟')">💰 الأسعار</button>
-    <button class="h" onclick="mzHuman()">🙋 كلّم بدر</button>
+    <button class="h" onclick="mzHuman()">🙋 كلّم موظف</button>
   </div>
   <div class="mz-ct" id="mzCt"><input id="mzN" placeholder="اسمك"><input id="mzPh" placeholder="رقمك" inputmode="tel"><button onclick="mzContact()">حفظ</button></div>
   <form class="mz-f" onsubmit="mzSend();return false"><input id="mzI" placeholder="اكتب رسالتك..." autocomplete="off"><button type="submit">إرسال</button></form>
@@ -683,10 +683,10 @@ const mzB=()=>document.getElementById('mzB');
 function mzRender(ms){const B=mzB();document.querySelectorAll('.mz-typing').forEach(x=>x.remove());
   for(const m of ms){if(m.id<=mz.last)continue;mz.last=m.id;const d=document.createElement('div');
     const cls={visitor:'v',ai:'ai',owner:'ow',system:'sys'}[m.role]||'ai';d.className='mz-m '+cls;
-    if(cls==='ai'||cls==='ow'){const w=document.createElement('span');w.className='who';w.textContent=cls==='ow'?'بدر — مزج ستوديو':'✦ المساعد الذكي';d.appendChild(w)}
+    if(cls==='ai'||cls==='ow'){const w=document.createElement('span');w.className='who';w.textContent=cls==='ow'?'فريق مزج ستوديو':'✦ المساعد الذكي';d.appendChild(w)}
     d.appendChild(document.createTextNode(m.body));B.appendChild(d)}
   B.scrollTop=B.scrollHeight}
-function mzSetStatus(s){if(!s)return;mz.status=s;document.getElementById('mzSt').textContent=s==='human'?'تم التحويل لبدر · بيرد عليك هنا':'متصل الآن · يرد فوراً';
+function mzSetStatus(s){if(!s)return;mz.status=s;document.getElementById('mzSt').textContent=s==='human'?'تم التحويل لفريقنا · بيرد عليك هنا':'متصل الآن · يرد فوراً';
   document.getElementById('mzCt').classList.toggle('show',s==='human'&&!localStorage.getItem('mz_ct'))}
 async function mzEnsure(){if(mz.id)return;const r=await mzApi({action:'start',page:location.pathname});mz.id=r.id;mz.token=r.token;mzSave();mzB().innerHTML='';mz.last=0}
 async function mzPoll(){if(!mz.id)return;try{const r=await mzApi({action:'poll',id:mz.id,token:mz.token,after:mz.last});
