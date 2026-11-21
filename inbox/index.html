@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مزج — محادثات العملاء</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#07070b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="مزج شات">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070b;--card:#12121b;--line:rgba(255,255,255,.08);--tx:#f4f1ea;--mut:#9c9aa8;--gold:#d8b46a;--gold2:#f3dca6;--vio:#7c5cff;--wa:#25d366}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;overflow:hidden}
+h1,h2,b.t{font-family:"Alexandria",sans-serif}
+button,input,textarea{font-family:inherit;font-size:1rem}
+.scr{position:fixed;inset:0;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+.hide{display:none!important}
+/* login */
+#login{align-items:center;justify-content:center;padding:2rem;text-align:center;gap:1rem}
+#login img{width:88px;border-radius:22px}
+#login input{width:100%;max-width:320px;background:#171722;border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem;color:var(--tx);text-align:center;outline:none;direction:ltr}
+.btn{border:0;border-radius:14px;padding:.85rem 1.3rem;font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1a1307}
+.btn.g{background:#1a1a25;color:var(--tx);border:1px solid var(--line)}
+.err{color:#ff8a8a;font-size:.85rem;min-height:1.2em}
+/* top bar */
+.top{display:flex;align-items:center;gap:.7rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);background:#0b0b11}
+.top h1{font-size:1.15rem;flex:1}
+.top h1 small{display:block;font-family:"IBM Plex Sans Arabic";font-weight:400;font-size:.72rem;color:var(--mut)}
+.ib{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#14141d;color:var(--tx);font-size:1.1rem;cursor:pointer;display:grid;place-items:center}
+.banner{margin:.8rem 1rem 0;padding:.8rem 1rem;border-radius:14px;background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(216,180,106,.12));border:1px solid rgba(216,180,106,.3);font-size:.85rem;display:flex;gap:.7rem;align-items:center}
+.banner .btn{padding:.5rem .9rem;font-size:.85rem;white-space:nowrap}
+/* list */
+.tabs{display:flex;gap:.4rem;padding:.8rem 1rem .2rem}
+.tabs button{flex:1;background:#14141d;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:.45rem;font-size:.8rem;cursor:pointer}
+.tabs button.on{background:var(--gold);color:#1a1307;border-color:var(--gold);font-weight:600}
+#list{flex:1;overflow-y:auto;padding:.5rem 0 1rem}
+.it{display:flex;gap:.8rem;padding:.85rem 1rem;border-bottom:1px solid var(--line);cursor:pointer;align-items:center}
+.it:active{background:#12121b}
+.av{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:"Alexandria";font-weight:600;background:#1d1730;border:1px solid rgba(216,180,106,.3);color:var(--gold2)}
+.it .mid{flex:1;min-width:0}
+.it .nm{display:flex;justify-content:space-between;gap:.5rem;font-weight:600;font-size:.95rem}
+.it .nm time{color:var(--mut);font-weight:400;font-size:.72rem;flex:none}
+.it .pv{color:var(--mut);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.15rem}
+.chip{font-size:.62rem;padding:.08rem .5rem;border-radius:999px;margin-inline-start:.35rem;vertical-align:middle;font-weight:500}
+.chip.human{background:#25d36622;color:#7dffb0;border:1px solid #25d36655}
+.chip.ai{background:#7c5cff22;color:#b9a6ff;border:1px solid #7c5cff55}
+.chip.closed{background:#ffffff10;color:var(--mut)}
+.bd{min-width:22px;height:22px;border-radius:11px;background:var(--wa);color:#04210f;font-size:.72rem;font-weight:700;display:grid;place-items:center;padding:0 6px}
+.empty{text-align:center;color:var(--mut);padding:3rem 1rem;font-size:.9rem}
+/* chat */
+#msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.5rem;background:#09090e}
+.m{max-width:82%;padding:.6rem .85rem;border-radius:16px;font-size:.92rem;line-height:1.6;white-space:pre-wrap;word-wrap:break-word}
+.m small{display:block;font-size:.62rem;opacity:.6;margin-top:.2rem}
+.m .who{display:block;font-size:.65rem;margin-bottom:.15rem}
+.m.visitor{align-self:flex-start;background:#1a1a25;border:1px solid var(--line);border-bottom-right-radius:4px}
+.m.ai{align-self:flex-end;background:#1d1730;border:1px solid #7c5cff40;border-bottom-left-radius:4px}
+.m.ai .who{color:#b9a6ff}
+.m.owner{align-self:flex-end;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1a1307;border-bottom-left-radius:4px}
+.m.system{align-self:center;color:var(--mut);font-size:.75rem;text-align:center}
+.act{display:flex;gap:.4rem;padding:.6rem 1rem;border-top:1px solid var(--line);overflow-x:auto;background:#0b0b11}
+.act a,.act button{flex:none;font-size:.78rem;padding:.45rem .8rem;border-radius:999px;border:1px solid var(--line);background:#14141d;color:var(--tx);text-decoration:none;cursor:pointer}
+.act .w{border-color:#25d36660;color:#7dffb0}
+form.rep{display:flex;gap:.5rem;padding:.7rem .8rem;border-top:1px solid var(--line);background:#0b0b11}
+form.rep textarea{flex:1;resize:none;height:46px;max-height:120px;background:#171722;border:1px solid var(--line);border-radius:22px;padding:.7rem 1rem;color:var(--tx);outline:none}
+form.rep button{width:46px;height:46px;border-radius:50%;border:0;background:var(--gold);color:#1a1307;font-size:1.2rem;cursor:pointer;flex:none}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#1d1730;border:1px solid rgba(216,180,106,.4);padding:.6rem 1rem;border-radius:999px;font-size:.85rem;z-index:9;opacity:0;transition:.3s;pointer-events:none}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="scr hide" id="login">
+  <img src="icon-192.png" alt="">
+  <h2>محادثات مزج ستوديو</h2>
+  <p style="color:var(--mut);font-size:.9rem">اكتب كود الدخول</p>
+  <input id="code" type="password" autocomplete="current-password" placeholder="••••••••">
+  <button class="btn" onclick="doLogin()">دخول</button>
+  <div class="err" id="lerr"></div>
+</div>
+
+<!-- LIST -->
+<div class="scr hide" id="home">
+  <div class="top">
+    <h1>المحادثات<small id="sub">—</small></h1>
+    <button class="ib" onclick="refresh(true)" aria-label="تحديث">↻</button>
+    <button class="ib" onclick="settings()" aria-label="الإعدادات">⚙︎</button>
+  </div>
+  <div class="banner hide" id="nb"><span style="flex:1" id="nbt">فعّل الإشعارات عشان توصلك رسائل العملاء على جوالك</span><button class="btn" id="nbb" onclick="enablePush()">تفعيل</button></div>
+  <div class="tabs"><button class="on" data-f="all">الكل</button><button data-f="human">تبي بدر</button><button data-f="ai">مع الذكاء</button><button data-f="closed">مغلقة</button></div>
+  <div id="list"></div>
+</div>
+
+<!-- CHAT -->
+<div class="scr hide" id="chat">
+  <div class="top">
+    <button class="ib" onclick="back()" aria-label="رجوع">→</button>
+    <h1 id="cname">—<small id="cinfo"></small></h1>
+  </div>
+  <div id="msgs"></div>
+  <div class="act" id="acts"></div>
+  <form class="rep" onsubmit="reply();return false">
+    <textarea id="rt" placeholder="اكتب ردّك..." rows="1"></textarea>
+    <button type="submit" aria-label="إرسال">➤</button>
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API="https://xncjznsdxryyveftdxmg.supabase.co/functions/v1/chat";
+let KEY=localStorage.getItem('mz_admin')||'';
+let S={convs:[],filter:'all',cur:null,last:0,timer:null};
+const $=id=>document.getElementById(id);
+const api=b=>fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...b,key:KEY})}).then(r=>r.json());
+const show=id=>['login','home','chat'].forEach(x=>$(x).classList.toggle('hide',x!==id));
+const toast=t=>{const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const name=c=>c.visitor_name||('زائر '+c.id.slice(0,4).toUpperCase());
+function ago(t){const s=(Date.now()-new Date(t))/1000;if(s<60)return'الآن';if(s<3600)return Math.floor(s/60)+' د';if(s<86400)return Math.floor(s/3600)+' س';return new Date(t).toLocaleDateString('ar-KW',{day:'numeric',month:'short'})}
+const ST={human:'تبي بدر',ai:'الذكاء يرد',closed:'مغلقة'};
+
+async function doLogin(){KEY=$('code').value.trim();const r=await api({action:'a_login'}).catch(()=>({}));
+  if(r.ok){localStorage.setItem('mz_admin',KEY);start()}else{$('lerr').textContent='الكود غلط'}}
+$('code').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+
+async function start(){show('home');pushBanner();await refresh();openFromHash();clearInterval(S.timer);S.timer=setInterval(tick,5000)}
+async function tick(){if(document.hidden)return;if(S.cur)await loadMsgs();else await refresh()}
+
+async function refresh(manual){const r=await api({action:'a_list'}).catch(()=>null);if(!r)return;
+  if(r.error==='unauthorized'){localStorage.removeItem('mz_admin');KEY='';show('login');return}
+  S.convs=r.conversations||[];renderList();if(manual)toast('تم التحديث')}
+function renderList(){const L=$('list');const f=S.filter;const cs=S.convs.filter(c=>f==='all'||c.status===f);
+  const un=S.convs.reduce((a,c)=>a+(c.unread||0),0);
+  $('sub').textContent=S.convs.length+' محادثة'+(un?(' · '+un+' غير مقروءة'):'');
+  try{un?navigator.setAppBadge?.(un):navigator.clearAppBadge?.()}catch(e){}
+  if(!cs.length){L.innerHTML='<div class="empty">ما فيه محادثات هنا للحين ✨<br>أول ما يكتب عميل في الموقع بتشوفه هنا ويوصلك إشعار.</div>';return}
+  L.innerHTML=cs.map(c=>{const l=c.last;const pre=l?(l.role==='owner'?'أنت: ':l.role==='ai'?'🤖 ':''):'';
+    return `<div class="it" onclick="openConv('${c.id}')"><div class="av">${esc(name(c).trim()[0]||'؟')}</div><div class="mid">
+    <div class="nm"><span>${esc(name(c))}<span class="chip ${c.status}">${ST[c.status]}</span></span><time>${ago(c.last_message_at)}</time></div>
+    <div class="pv">${esc(pre+(l?l.body:''))}</div></div>${c.unread?`<div class="bd">${c.unread}</div>`:''}</div>`}).join('')}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');S.filter=b.dataset.f;renderList()});
+
+async function openConv(id){S.cur=id;S.last=0;$('msgs').innerHTML='';show('chat');history.replaceState(null,'','#c='+id);await loadMsgs()}
+function back(){S.cur=null;history.replaceState(null,'','#');show('home');refresh()}
+async function loadMsgs(){if(!S.cur)return;const r=await api({action:'a_msgs',id:S.cur,after:S.last}).catch(()=>null);if(!r||!r.conversation)return;
+  const c=r.conversation;$('cname').firstChild.textContent=name(c);
+  $('cinfo').textContent=[c.visitor_phone,ST[c.status]].filter(Boolean).join(' · ');
+  const ph=(c.visitor_phone||'').replace(/\D/g,'');const wa=ph?(ph.length===8?'965'+ph:ph):'';
+  $('acts').innerHTML=(wa?`<a class="w" href="https://wa.me/${wa}" target="_blank">واتساب العميل</a><a href="tel:${ph}">اتصال</a>`:'')+
+    (c.status!=='ai'?`<button onclick="setSt('ai')">🤖 رجّعه للذكاء</button>`:`<button onclick="setSt('human')">🙋 استلم المحادثة</button>`)+
+    (c.status!=='closed'?`<button onclick="setSt('closed')">✓ إغلاق</button>`:'');
+  addMsgs(r.messages||[])}
+function addMsgs(ms){const M=$('msgs');let add=false;for(const m of ms){if(m.id<=S.last)continue;S.last=m.id;add=true;
+  const d=document.createElement('div');d.className='m '+m.role;
+  const who={ai:'🤖 المساعد الذكي',owner:''}[m.role];
+  d.innerHTML=(who?`<span class="who">${who}</span>`:'')+esc(m.body)+(m.role!=='system'?`<small>${new Date(m.created_at).toLocaleTimeString('ar-KW',{hour:'numeric',minute:'2-digit'})}</small>`:'');M.appendChild(d)}
+  if(add)M.scrollTop=M.scrollHeight}
+async function reply(){const t=$('rt').value.trim();if(!t||!S.cur)return;$('rt').value='';
+  const r=await api({action:'a_reply',id:S.cur,text:t,after:S.last}).catch(()=>null);if(r?.messages)addMsgs(r.messages);else toast('ما انرسلت، جرّب مرة ثانية')}
+$('rt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&window.matchMedia('(pointer:fine)').matches){e.preventDefault();reply()}});
+async function setSt(s){await api({action:'a_status',id:S.cur,status:s});toast(s==='ai'?'رجع للمساعد الذكي':s==='closed'?'تم الإغلاق':'استلمت المحادثة');loadMsgs()}
+function openFromHash(){const m=location.hash.match(/c=([\w-]+)/);if(m&&m[1]!=='test')openConv(m[1])}
+window.addEventListener('hashchange',openFromHash);
+
+/* ---------- push ---------- */
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+let swReg=null;
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(r=>swReg=r).catch(()=>{});
+  navigator.serviceWorker.addEventListener('message',e=>{if(e.data?.type==='refresh')tick();if(e.data?.type==='open'){location.hash=new URL(e.data.url).hash}})}
+function pushBanner(){const nb=$('nb');
+  if(isIOS&&!standalone){nb.classList.remove('hide');$('nbt').innerHTML='عشان توصلك الإشعارات على الآيفون: اضغط <b>مشاركة ⬆︎</b> ← <b>إضافة إلى الشاشة الرئيسية</b>، وافتح التطبيق من هناك.';$('nbb').classList.add('hide');return}
+  if(!('PushManager' in window)||!('Notification' in window)){nb.classList.add('hide');return}
+  nb.classList.toggle('hide',Notification.permission==='granted'&&localStorage.getItem('mz_sub')==='1')}
+function b64u(s){const p='='.repeat((4-s.length%4)%4);const r=atob((s+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from([...r].map(c=>c.charCodeAt(0)))}
+async function enablePush(){try{const perm=await Notification.requestPermission();if(perm!=='granted'){toast('لازم تسمح بالإشعارات من الإعدادات');return}
+  const reg=swReg||await navigator.serviceWorker.ready;const {key}=await api({action:'vapid'});
+  let sub=await reg.pushManager.getSubscription();if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(key)});
+  const r=await api({action:'a_sub',sub:sub.toJSON()});if(r.ok){localStorage.setItem('mz_sub','1');pushBanner();toast('تم تفعيل الإشعارات ✅');api({action:'a_test'})}
+  }catch(e){toast('ما قدرت أفعّل الإشعارات: '+e.message)}}
+function settings(){const ok=confirmBox();}
+function confirmBox(){const html=`<div id="sett" style="position:fixed;inset:0;background:#000a;z-index:20;display:flex;align-items:flex-end"><div style="background:#12121b;width:100%;border-radius:22px 22px 0 0;padding:1.2rem 1.2rem calc(1.2rem + env(safe-area-inset-bottom));display:grid;gap:.6rem;border-top:1px solid var(--line)">
+  <b class="t" style="font-size:1.05rem">الإعدادات</b>
+  <button class="btn" onclick="enablePush();closeS()">🔔 تفعيل / تحديث الإشعارات</button>
+  <button class="btn g" onclick="api({action:'a_test'});toast('أرسلت إشعار تجربة');closeS()">إرسال إشعار تجربة</button>
+  <button class="btn g" onclick="localStorage.clear();location.reload()">تسجيل خروج</button>
+  <button class="btn g" onclick="closeS()">إغلاق</button></div></div>`;document.body.insertAdjacentHTML('beforeend',html)}
+function closeS(){$('sett')?.remove()}
+
+if(KEY)start();else show('login');
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
+</script>
+</body>
+</html>
