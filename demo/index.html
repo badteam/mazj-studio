@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bite & Delight — Sweets & Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#151820; --navy2:#1e2230; --gold:#c9a24a; --gold2:#e6c97a; --cream:#f7f2e9; --paper:#fffdf9;
+  --ink:#1b1d24; --muted:#6f6a62; --line:#e7dfd0; --cocoa:#4a2a20;
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"IBM Plex Sans Arabic","Jost",system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+html[lang=en] body{font-family:"Jost","IBM Plex Sans Arabic",system-ui,sans-serif}
+.display{font-family:"El Messiri","Cormorant Garamond",serif}
+html[lang=en] .display{font-family:"Cormorant Garamond","El Messiri",serif;letter-spacing:.2px}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+/* demo ribbon */
+.demo{background:var(--gold);color:var(--navy);text-align:center;font-size:13px;font-weight:600;padding:6px 12px}
+
+/* header */
+header{position:sticky;top:0;z-index:40;background:rgba(21,24,32,.96);backdrop-filter:blur(8px);color:#fff;border-bottom:1px solid rgba(201,162,74,.25)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{height:44px;width:auto}
+.brand b{font-family:"Cormorant Garamond",serif;font-size:22px;letter-spacing:3px;color:var(--gold2);font-weight:600;white-space:nowrap}
+.links{display:flex;gap:26px;font-size:15px;color:#d9d4c8}
+.links a:hover{color:var(--gold2)}
+.tools{display:flex;align-items:center;gap:10px}
+.lang{border:1px solid rgba(201,162,74,.5);color:var(--gold2);border-radius:99px;padding:6px 14px;font-size:13px;font-family:"Jost",sans-serif}
+.cartbtn{position:relative;background:var(--gold);color:var(--navy);border-radius:99px;padding:9px 16px;font-weight:600;display:flex;align-items:center;gap:8px;font-size:14px}
+.cartbtn .n{background:var(--navy);color:var(--gold2);border-radius:99px;min-width:22px;height:22px;display:grid;place-items:center;font-size:12px;padding:0 6px}
+.bump{animation:bump .35s}
+@keyframes bump{50%{transform:scale(1.12)}}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;overflow:hidden;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;min-height:560px;padding-top:40px;padding-bottom:40px}
+.eyebrow{color:var(--gold2);letter-spacing:4px;font-size:12px;text-transform:uppercase;font-family:"Jost",sans-serif;display:flex;align-items:center;gap:10px}
+.eyebrow:before{content:"";width:34px;height:1px;background:var(--gold)}
+.hero h1{font-size:clamp(38px,5.4vw,66px);line-height:1.15;margin:18px 0 18px;font-weight:600}
+.hero h1 em{font-style:normal;color:var(--gold2)}
+.hero p{color:#c9c3b6;font-size:17px;max-width:480px}
+.cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:99px;font-weight:600;font-size:15px;transition:.2s}
+.btn.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy)}
+.btn.gold:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn.ghost{border:1px solid rgba(255,255,255,.3);color:#fff}
+.btn.ghost:hover{border-color:var(--gold2);color:var(--gold2)}
+.heroimg{position:relative;justify-self:center;width:min(440px,100%)}
+.heroimg .frame{border-radius:220px 220px 24px 24px;overflow:hidden;border:1px solid rgba(201,162,74,.5);padding:10px;}
+.heroimg .frame img{border-radius:210px 210px 16px 16px;aspect-ratio:4/5;object-fit:cover;width:100%}
+.heroimg .badge{position:absolute;bottom:34px;inset-inline-start:-26px;background:var(--paper);color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:0 18px 40px rgba(0,0,0,.35);display:flex;gap:10px;align-items:center;font-size:13px}
+.heroimg .badge b{display:block;font-size:15px}
+.heroimg .badge i{font-style:normal;font-size:26px}
+.stats{display:flex;gap:34px;margin-top:40px;color:#c9c3b6;font-size:13px}
+.stats b{display:block;color:#fff;font-size:24px;font-family:"Cormorant Garamond",serif}
+
+/* sections */
+section{padding:86px 0}
+.head{text-align:center;max-width:620px;margin:0 auto 40px}
+.head img{height:38px;margin:0 auto 10px;width:auto}
+.head h2{font-size:clamp(30px,3.6vw,44px);font-weight:600;line-height:1.2}
+.head p{color:var(--muted);margin-top:10px}
+
+/* filters + grid */
+.filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
+.chip{border:1px solid var(--line);background:var(--paper);padding:8px 18px;border-radius:99px;font-size:14px;color:var(--muted);transition:.2s}
+.chip.on,.chip:hover{background:var(--navy);color:var(--gold2);border-color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.card{background:var(--paper);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:.25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(40,30,15,.12)}
+.pic{position:relative;aspect-ratio:1/1;overflow:hidden;background:#eee}
+.pic img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.card:hover .pic img{transform:scale(1.05)}
+.pic.navy{background:radial-gradient(circle at 50% 40%,#2a3042,var(--navy));display:grid;place-items:center}
+.pic.navy img{width:46%;height:auto;object-fit:contain}
+.pic.navy .lbl{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:var(--gold2);font-family:"Cormorant Garamond",serif;letter-spacing:3px;font-size:14px}
+.tag{position:absolute;top:12px;inset-inline-start:12px;background:var(--navy);color:var(--gold2);font-size:12px;padding:4px 11px;border-radius:99px}
+.body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.body h3{font-size:21px;font-weight:600;line-height:1.3}
+.body p{color:var(--muted);font-size:14px;margin:6px 0 14px;flex:1}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font-weight:600;font-size:18px;color:var(--cocoa);font-family:"Jost",sans-serif}
+.price small{font-size:12px;color:var(--muted);font-weight:500}
+.add{background:var(--navy);color:var(--gold2);border-radius:99px;padding:9px 16px;font-size:14px;font-weight:500;transition:.2s}
+.add:hover{background:var(--gold);color:var(--navy)}
+.opts{margin:-4px 0 14px}
+.opts select{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;font-size:14px}
+
+/* events */
+.events{background:var(--navy);color:#fff}
+.events .wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.events h2{font-size:clamp(30px,3.6vw,44px);line-height:1.2;margin:14px 0}
+.events p{color:#c9c3b6}
+.elist{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 30px}
+.elist div{border:1px solid rgba(201,162,74,.3);border-radius:14px;padding:16px;font-size:14px;color:#ddd6c8}
+.elist b{display:block;color:var(--gold2);font-size:16px;margin-bottom:2px}
+.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mosaic img{border-radius:16px;width:100%;height:220px;object-fit:cover}
+.mosaic img:first-child{grid-row:span 2;height:452px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:28px;text-align:center}
+.step .num{width:52px;height:52px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:var(--navy);color:var(--gold2);font-family:"Cormorant Garamond",serif;font-size:24px}
+.step h3{font-size:20px;margin-bottom:6px}
+.step p{color:var(--muted);font-size:14px}
+
+/* reviews */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev{background:var(--paper);border-radius:var(--r);padding:26px;border:1px solid var(--line)}
+.rev .st{color:var(--gold);letter-spacing:3px}
+.rev p{margin:10px 0 14px;font-size:15px}
+.rev b{font-size:14px;color:var(--muted);font-weight:500}
+.note{text-align:center;color:var(--muted);font-size:12px;margin-top:14px}
+
+/* insta */
+.insta{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px}
+.insta img{aspect-ratio:1;object-fit:cover;border-radius:12px;width:100%}
+
+/* footer */
+footer{background:var(--navy);color:#bdb6a8;padding:60px 0 26px;font-size:14px}
+.fgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:30px}
+footer img{height:120px;width:auto;margin-bottom:8px}
+footer h4{color:var(--gold2);font-size:15px;margin-bottom:12px;font-weight:600}
+footer li{list-style:none;margin-bottom:8px}
+footer a:hover{color:var(--gold2)}
+.copy{border-top:1px solid rgba(255,255,255,.08);margin-top:40px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px}
+
+/* drawer */
+.ov{position:fixed;inset:0;background:rgba(10,12,18,.55);opacity:0;pointer-events:none;transition:.3s;z-index:60}
+.ov.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(430px,100%);background:var(--paper);z-index:70;transform:translateX(-105%);transition:.35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+html[dir=ltr] .drawer{transform:translateX(105%)}
+.drawer.on{transform:none!important}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}
+.dh h3{font-size:22px}
+.x{font-size:26px;line-height:1;color:var(--muted)}
+.items{flex:1;overflow:auto;padding:10px 22px}
+.it{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed var(--line);align-items:center}
+.it img,.it .ph{width:62px;height:62px;border-radius:12px;object-fit:cover;flex:none;background:var(--navy)}
+.it .ph{display:grid;place-items:center}.it .ph img{width:34px;height:auto;border-radius:0;background:none}
+.it .t{flex:1;font-size:14px}
+.it .t b{display:block;font-size:15px}
+.it .t span{color:var(--muted);font-size:12px}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:99px}
+.qty button{width:30px;height:30px;font-size:16px}
+.qty span{min-width:20px;text-align:center;font-size:14px}
+.empty{text-align:center;color:var(--muted);padding:60px 10px}
+.empty img{height:60px;margin:0 auto 14px;opacity:.8}
+.df{padding:18px 22px 22px;border-top:1px solid var(--line);background:#fbf7ef}
+.df label{font-size:13px;color:var(--muted);display:block;margin:8px 0 4px}
+.df select,.df input,.df textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;background:#fff}
+.df .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sum{margin:14px 0;font-size:14px}
+.sum .row{padding:3px 0}
+.sum .tot{font-size:18px;font-weight:600;border-top:1px solid var(--line);padding-top:8px;margin-top:6px}
+.wa{width:100%;justify-content:center;background:#1f9d55;color:#fff}
+.wa:hover{background:#178246}
+.err{color:#b3261e;font-size:13px;margin-top:6px;min-height:18px}
+
+/* modal */
+.modal{position:fixed;inset:0;display:grid;place-items:center;z-index:80;opacity:0;pointer-events:none;transition:.25s;padding:20px}
+.modal.on{opacity:1;pointer-events:auto}
+.mbox{background:var(--paper);border-radius:22px;max-width:440px;width:100%;padding:30px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.mbox img{height:70px;margin:0 auto 10px}
+.mbox h3{font-size:24px;margin-bottom:8px}
+.mbox p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.mbox pre{white-space:pre-wrap;text-align:start;background:#f3eee4;border-radius:12px;padding:14px;font-family:inherit;font-size:13px;max-height:220px;overflow:auto;margin-bottom:16px}
+.mbox .cta{justify-content:center;margin-top:0}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,30px);background:var(--navy);color:var(--gold2);padding:12px 22px;border-radius:99px;font-size:14px;opacity:0;transition:.3s;z-index:90;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.fab{position:fixed;bottom:22px;inset-inline-start:22px;z-index:50;background:#1f9d55;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+
+@media(max-width:900px){
+  .links{display:none}
+  .hero .wrap,.events .wrap{grid-template-columns:1fr}
+  .hero .wrap{text-align:center;padding-top:40px}
+  .hero p{margin:0 auto}.eyebrow{justify-content:center}.cta,.stats{justify-content:center}
+  .heroimg{width:min(330px,90%);margin-top:10px}
+  .steps,.reviews{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .insta{grid-template-columns:repeat(3,1fr)}.insta img:nth-child(n+4){display:none}
+  .brand b{display:none}
+  section{padding:64px 0}
+}
+@media(max-width:520px){.elist{grid-template-columns:1fr}.mosaic img{height:160px}.mosaic img:first-child{height:332px}.cartbtn .lbl{display:none}}
+</style>
+</head>
+<body>
+
+<div class="demo" data-t="demo"></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand"><img src="emblem-t.png" alt=""><b>BITE &amp; DELIGHT</b></a>
+    <nav class="links">
+      <a href="#menu" data-t="nMenu"></a>
+      <a href="#events" data-t="nEvents"></a>
+      <a href="#how" data-t="nHow"></a>
+      <a href="#contact" data-t="nContact"></a>
+    </nav>
+    <div class="tools">
+      <button class="lang" id="lang">EN</button>
+      <button class="cartbtn" id="openCart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="lbl" data-t="cart"></span><span class="n" id="count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Sweets &amp; Events</div>
+      <h1 class="display" data-t="heroH" data-html></h1>
+      <p data-t="heroP"></p>
+      <div class="cta">
+        <a href="#menu" class="btn gold" data-t="heroB1"></a>
+        <a href="#events" class="btn ghost" data-t="heroB2"></a>
+      </div>
+      <div class="stats">
+        <div><b>+15</b><span data-t="s1"></span></div>
+        <div><b>100%</b><span data-t="s2"></span></div>
+        <div><b>24h</b><span data-t="s3"></span></div>
+      </div>
+    </div>
+    <div class="heroimg">
+      <div class="frame"><img src="hero.jpg" alt="Bite & Delight"></div>
+      <div class="badge"><i>🥐</i><div><b data-t="bdgB"></b><span data-t="bdgS"></span></div></div>
+    </div>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="head">
+      <img src="emblem-t.png" alt="">
+      <h2 class="display" data-t="menuH"></h2>
+      <p data-t="menuP"></p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="events" id="events">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Events &amp; Gatherings</div>
+      <h2 class="display" data-t="evH"></h2>
+      <p data-t="evP"></p>
+      <div class="elist">
+        <div><b data-t="e1"></b><span data-t="e1s"></span></div>
+        <div><b data-t="e2"></b><span data-t="e2s"></span></div>
+        <div><b data-t="e3"></b><span data-t="e3s"></span></div>
+        <div><b data-t="e4"></b><span data-t="e4s"></span></div>
+      </div>
+      <button class="btn gold" id="eventBtn" data-t="evB"></button>
+    </div>
+    <div class="mosaic">
+      <img src="dates.jpg" alt="">
+      <img src="icecream.jpg" alt="">
+      <img src="kinder.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head"><img src="emblem-t.png" alt=""><h2 class="display" data-t="howH"></h2></div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3 data-t="h1"></h3><p data-t="h1s"></p></div>
+      <div class="step"><div class="num">2</div><h3 data-t="h2"></h3><p data-t="h2s"></p></div>
+      <div class="step"><div class="num">3</div><h3 data-t="h3"></h3><p data-t="h3s"></p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><h2 class="display" data-t="revH"></h2></div>
+    <div class="reviews">
+      <div class="rev"><div class="st">★★★★★</div><p data-t="r1"></p><b data-t="r1n"></b></div>
+      <div class="rev"><div class="st">★★★★★</div><p data-t="r2"></p><b data-t="r2n"></b></div>
+      <div class="rev"><div class="st">★★★★★</div><p data-t="r3"></p><b data-t="r3n"></b></div>
+    </div>
+    <p class="note" data-t="revNote"></p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><h2 class="display">@bite.delight.kw</h2><p data-t="igP"></p></div>
+    <div class="insta">
+      <img src="croissant.jpg" alt=""><img src="kinder.jpg" alt=""><img src="icecream.jpg" alt=""><img src="dates.jpg" alt=""><img src="hero.jpg" alt="">
+    </div>
+    <div style="text-align:center;margin-top:26px"><a class="btn ghost" style="color:var(--ink);border-color:var(--line)" href="https://www.instagram.com/bite.delight.kw" target="_blank" rel="noopener" data-t="igB"></a></div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="fgrid">
+      <div><img src="logo-t.png" alt="Bite & Delight"><p data-t="fAbout"></p></div>
+      <div><h4 data-t="fLinks"></h4><ul><li><a href="#menu" data-t="nMenu"></a></li><li><a href="#events" data-t="nEvents"></a></li><li><a href="#how" data-t="nHow"></a></li></ul></div>
+      <div><h4 data-t="fHours"></h4><ul><li data-t="fH1"></li><li data-t="fH2"></li><li data-t="fH3"></li></ul></div>
+      <div><h4 data-t="nContact"></h4><ul>
+        <li><a href="https://wa.me/96597899756" target="_blank" rel="noopener" dir="ltr">+965 9789 9756</a></li>
+        <li><a href="https://www.instagram.com/bite.delight.kw" target="_blank" rel="noopener" dir="ltr">@bite.delight.kw</a></li>
+        <li data-t="fArea"></li></ul></div>
+    </div>
+    <div class="copy"><span>© 2026 Bite &amp; Delight — Sweets &amp; Events</span><span data-t="by"></span></div>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/96597899756" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer">
+  <div class="dh"><h3 class="display" data-t="cartH"></h3><button class="x" id="closeCart">×</button></div>
+  <div class="items" id="items"></div>
+  <div class="df" id="df">
+    <div class="two">
+      <div><label data-t="fName"></label><input id="cName"></div>
+      <div><label data-t="fPhone"></label><input id="cPhone" inputmode="tel" dir="ltr"></div>
+    </div>
+    <div class="two">
+      <div><label data-t="fArea2"></label><select id="cArea"></select></div>
+      <div><label data-t="fDate"></label><input id="cDate" type="date"></div>
+    </div>
+    <label data-t="fNotes"></label><textarea id="cNotes" rows="2"></textarea>
+    <div class="sum">
+      <div class="row"><span data-t="sub"></span><span id="sub"></span></div>
+      <div class="row"><span data-t="del"></span><span id="del"></span></div>
+      <div class="row tot"><span data-t="tot"></span><span id="tot"></span></div>
+    </div>
+    <button class="btn wa" id="checkout"></button>
+    <div class="err" id="err"></div>
+  </div>
+</aside>
+
+<div class="modal" id="modal"><div class="mbox">
+  <img src="emblem-t.png" alt="">
+  <h3 class="display" data-t="mH"></h3>
+  <p data-t="mP"></p>
+  <pre id="mMsg"></pre>
+  <div class="cta"><a class="btn wa" id="mWa" target="_blank" rel="noopener" data-t="mWa"></a><button class="btn ghost" style="color:var(--ink);border-color:var(--line)" id="mClose" data-t="mClose"></button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const WA="96597899756";
+const T={
+ ar:{demo:"نسخة تجريبية للعرض — الأسعار والمعلومات مبدئية وقابلة للتعديل",nMenu:"المنيو",nEvents:"المناسبات",nHow:"طريقة الطلب",nContact:"تواصل معنا",cart:"السلة",
+  heroH:"حلويات تُصنع <em>بحب</em><br>وتُقدَّم بفخامة",heroP:"براونيز، كيكات، معجنات وبوكسات ضيافة — تفاصيل مرتبة ونكهات مختارة تخلي كل جمعة أحلى.",
+  heroB1:"اطلب الحين",heroB2:"طلبات المناسبات",s1:"صنف مختار",s2:"مكونات طازجة",s3:"توصيل لكل الكويت",bdgB:"طازج كل يوم",bdgS:"نخبز على الطلب",
+  menuH:"منتجاتنا",menuP:"اختار اللي يعجبك وأضفه للسلة، وطلبك يوصلنا مباشرة على الواتساب.",
+  all:"الكل",brownies:"براونيز",cakes:"كيك",pastry:"معجنات",boxes:"بوكسات وضيافة",add:"أضف للسلة",added:"تمت الإضافة للسلة ✓",kd:"د.ك",
+  evH:"مو مجرد حلا… تجربة تنعاش",evP:"نجهز لكم طاولات وبوكسات ضيافة للتجمعات، الصباحات، والمناسبات الخاصة — بتقديم أنيق يشبه ذوقكم.",
+  e1:"تجمعات عائلية",e1s:"بوكسات مشكلة حسب العدد",e2:"اجتماعات العمل",e2s:"ضيافة صباحية مرتبة",e3:"أعياد الميلاد",e3s:"كيك وتوزيعات خاصة",e4:"طاولات ضيافة",e4s:"Grazing tables كاملة",evB:"اطلب عرض سعر لمناسبتك",
+  howH:"طريقة الطلب",h1:"اختار",h1s:"تصفح المنيو وأضف الأصناف اللي تبيها للسلة.",h2:"حدد التفاصيل",h2s:"المنطقة وموعد التوصيل وأي ملاحظات.",h3:"أرسل على الواتساب",h3s:"يوصلنا طلبك جاهز، نأكد معاك ونجهزه.",
+  revH:"شنو قالوا عنا",r1:"البراونيز بالكيندر خيااال، طلبته لجمعة البنات واختفى بدقايق 😍",r1n:"— نوره، السالمية",r2:"بوكس الضيافة كان مرتب وفخم، الكل سألني من وين.",r2n:"— عبدالله، الجابرية",r3:"ديت بليس أطيب شي ذقته مع القهوة العربية.",r3n:"— مريم، القرين",revNote:"* آراء تجريبية لأغراض العرض",
+  igP:"تابعونا لآخر المنتجات والعروض",igB:"تابعنا على انستغرام",
+  fAbout:"حلويات ومناسبات — نصنع لحظاتكم الحلوة بتفاصيل مرتبة ونكهات مختارة.",fLinks:"روابط",fHours:"أوقات الطلب",fH1:"يومياً ٩ص – ١١م",fH2:"التوصيل من ١٢ظ – ١٠م",fH3:"طلبات المناسبات قبلها بـ ٤٨ ساعة",fArea:"التوصيل لجميع مناطق الكويت",by:"تصميم وتطوير: مزج ستوديو",
+  cartH:"سلة الطلبات",empty:"السلة فاضية… خلنا نحليها 🤍",fName:"الاسم",fPhone:"رقم الهاتف",fArea2:"المحافظة",fDate:"تاريخ التوصيل",fNotes:"ملاحظات (اختياري)",
+  sub:"المجموع",del:"التوصيل",tot:"الإجمالي",checkout:"إرسال الطلب على الواتساب",errName:"فضلاً اكتب الاسم ورقم الهاتف",errDate:"اختار تاريخ التوصيل",
+  mH:"طلبك جاهز ✨",mP:"هذا ملخص طلبك، اضغط إرسال ويفتح الواتساب برسالة جاهزة.",mWa:"فتح الواتساب",mClose:"إغلاق",
+  areas:["العاصمة","حولي","الفروانية","مبارك الكبير","الأحمدي","الجهراء"],
+  msgHead:"طلب جديد — Bite & Delight",mName:"الاسم",mPhone:"الهاتف",mArea:"المنطقة",mDate:"التاريخ",mNotes:"ملاحظات",evMsg:"مرحبا، أبي عرض سعر لمناسبة 🤍"},
+ en:{demo:"Demo preview — prices and details are placeholders",nMenu:"Menu",nEvents:"Events",nHow:"How to order",nContact:"Contact",cart:"Cart",
+  heroH:"Sweets made with <em>love</em>,<br>served in style",heroP:"Brownies, cakes, pastries and hospitality boxes — thoughtful details and hand-picked flavours for every gathering.",
+  heroB1:"Order now",heroB2:"Event orders",s1:"Signature items",s2:"Fresh ingredients",s3:"Delivery across Kuwait",bdgB:"Fresh every day",bdgS:"Baked to order",
+  menuH:"Our Treats",menuP:"Pick your favourites, add them to the cart, and your order lands straight in our WhatsApp.",
+  all:"All",brownies:"Brownies",cakes:"Cakes",pastry:"Pastry",boxes:"Boxes & Platters",add:"Add to cart",added:"Added to cart ✓",kd:"KD",
+  evH:"Not just dessert — an experience",evP:"We style platters and hospitality boxes for gatherings, mornings and special moments — elegant, generous and made to be shared.",
+  e1:"Family gatherings",e1s:"Mixed boxes sized to your guests",e2:"Office meetings",e2s:"Neat morning hospitality",e3:"Birthdays",e3s:"Cakes & custom giveaways",e4:"Grazing tables",e4s:"Full styled tables",evB:"Get a quote for your event",
+  howH:"How to order",h1:"Choose",h1s:"Browse the menu and add what you love to the cart.",h2:"Add details",h2s:"Area, delivery date and any notes.",h3:"Send via WhatsApp",h3s:"Your order reaches us ready — we confirm and prepare it.",
+  revH:"What people say",r1:"The Kinder brownies are unreal — gone in minutes at our girls' night 😍",r1n:"— Noura, Salmiya",r2:"The hospitality box was so neat and elegant, everyone asked where it's from.",r2n:"— Abdullah, Jabriya",r3:"Date Bliss is the best thing with Arabic coffee.",r3n:"— Maryam, Qurain",revNote:"* Sample reviews for demo purposes",
+  igP:"Follow us for new treats and offers",igB:"Follow on Instagram",
+  fAbout:"Sweets & Events — crafting your sweet moments with care and chosen flavours.",fLinks:"Links",fHours:"Order hours",fH1:"Daily 9am – 11pm",fH2:"Delivery 12pm – 10pm",fH3:"Event orders 48h in advance",fArea:"Delivering across all of Kuwait",by:"Designed & built by Mazj Studio",
+  cartH:"Your cart",empty:"Your cart is empty… let's sweeten it 🤍",fName:"Name",fPhone:"Phone",fArea2:"Governorate",fDate:"Delivery date",fNotes:"Notes (optional)",
+  sub:"Subtotal",del:"Delivery",tot:"Total",checkout:"Send order on WhatsApp",errName:"Please enter your name and phone",errDate:"Please pick a delivery date",
+  mH:"Your order is ready ✨",mP:"Here's your summary — tap send to open WhatsApp with the message ready.",mWa:"Open WhatsApp",mClose:"Close",
+  areas:["Capital","Hawalli","Farwaniya","Mubarak Al-Kabeer","Ahmadi","Jahra"],
+  msgHead:"New order — Bite & Delight",mName:"Name",mPhone:"Phone",mArea:"Area",mDate:"Date",mNotes:"Notes",evMsg:"Hi, I'd like a quote for an event 🤍"}
+};
+const DELIV=[1.5,1.5,2,2,2.5,3];
+const P=[
+ {id:"kinder",cat:"brownies",img:"kinder.jpg",tag:{ar:"الأكثر طلباً",en:"Best seller"},
+  n:{ar:"كيندر ملت براونيز",en:"Kinder Melt Brownies"},d:{ar:"براونيز غني محشي شوكولاتة كيندر تذوب مع كل قضمة.",en:"Fudgy brownies loaded with melting Kinder chocolate."},
+  o:[{ar:"بوكس ٦ قطع",en:"Box of 6",p:6.5},{ar:"بوكس ١٢ قطعة",en:"Box of 12",p:12}]},
+ {id:"dates",cat:"cakes",img:"dates.jpg",tag:{ar:"جديد",en:"New"},
+  n:{ar:"ديت بليس",en:"Date Bliss"},d:{ar:"مربعات كيك التمر الطري مع لمسة كراميل — رفيقة القهوة العربية.",en:"Soft date-cake bites with a caramel touch — made for Arabic coffee."},
+  o:[{ar:"بوكس ٩ قطع",en:"Box of 9",p:5.5},{ar:"بوكس ١٦ قطعة",en:"Box of 16",p:9.5}]},
+ {id:"icecream",cat:"cakes",img:"icecream.jpg",tag:{ar:"خاص لك",en:"Just for you"},
+  n:{ar:"كيكة آيس كريم ساندويتش",en:"Ice Cream Sandwich Cake"},d:{ar:"طبقات بسكويت شوكولاتة وآيس كريم فانيلا مع صوص الشوكولاتة.",en:"Chocolate cookie layers, vanilla ice cream and a chocolate drip."},
+  o:[{ar:"حجم صغير (٤-٦ أشخاص)",en:"Small (4–6)",p:9},{ar:"حجم كبير (٨-١٠ أشخاص)",en:"Large (8–10)",p:15}]},
+ {id:"croissant",cat:"pastry",img:"croissant.jpg",
+  n:{ar:"كرواسون الحبوب",en:"Multigrain Croissant"},d:{ar:"كرواسون بالزبدة وحبوب كاملة، مخبوز طازج كل صباح.",en:"Buttery multigrain croissant, baked fresh every morning."},
+  o:[{ar:"٤ حبات",en:"Pack of 4",p:3.5},{ar:"٨ حبات",en:"Pack of 8",p:6.5}]},
+ {id:"cheese",cat:"boxes",img:null,tag:{ar:"للتجمعات",en:"For gatherings"},
+  n:{ar:"تشيز بلاتر",en:"Cheese Platter"},d:{ar:"أجبان مختارة مع فواكه، مكسرات ومعجنات — مثالي للصباحات والجمعات.",en:"Selected cheeses with fruit, nuts and pastries — perfect for mornings & gatherings."},
+  o:[{ar:"وسط (٦-٨ أشخاص)",en:"Medium (6–8)",p:18},{ar:"كبير (١٠-١٥ شخص)",en:"Large (10–15)",p:28}]},
+ {id:"mix",cat:"boxes",img:null,
+  n:{ar:"بوكس الضيافة المشكل",en:"Signature Mix Box"},d:{ar:"تشكيلة من براونيز، ديت بليس وميني كرواسون في بوكس هدية أنيق.",en:"A mix of brownies, Date Bliss and mini croissants in an elegant gift box."},
+  o:[{ar:"بوكس ٢٠ قطعة",en:"20 pieces",p:14},{ar:"بوكس ٣٥ قطعة",en:"35 pieces",p:23}]}
+];
+let lang="ar",filter="all",cart=[];
+try{cart=JSON.parse(localStorage.getItem("bd_cart")||"[]");lang=localStorage.getItem("bd_lang")||"ar"}catch(e){}
+const $=s=>document.querySelector(s);
+const t=k=>T[lang][k];
+const fmt=v=>(lang==="ar"?v.toFixed(3)+" "+t("kd"):t("kd")+" "+v.toFixed(3));
+function save(){try{localStorage.setItem("bd_cart",JSON.stringify(cart));localStorage.setItem("bd_lang",lang)}catch(e){}}
+function applyLang(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-t]").forEach(el=>{const v=t(el.dataset.t);if(el.hasAttribute("data-html"))el.innerHTML=v;else el.textContent=v});
+  $("#lang").textContent=lang==="ar"?"EN":"عربي";
+  $("#checkout").textContent=t("checkout");
+  const a=$("#cArea"),cur=a.selectedIndex;a.innerHTML=t("areas").map((x,i)=>`<option value="${i}">${x}</option>`).join("");a.selectedIndex=cur<0?0:cur;
+  renderFilters();renderGrid();renderCart();save();
+}
+function renderFilters(){
+  $("#filters").innerHTML=["all","brownies","cakes","pastry","boxes"].map(c=>`<button class="chip ${c===filter?"on":""}" data-c="${c}">${t(c)}</button>`).join("");
+}
+function picHtml(p,cls){return p.img?`<img src="${p.img}" alt="">`:`<img src="emblem-t.png" alt=""><div class="lbl">${p.n.en.toUpperCase()}</div>`}
+function renderGrid(){
+  $("#grid").innerHTML=P.filter(p=>filter==="all"||p.cat===filter).map(p=>`
+   <article class="card">
+     <div class="pic ${p.img?"":"navy"}">${picHtml(p)}${p.tag?`<span class="tag">${p.tag[lang]}</span>`:""}</div>
+     <div class="body">
+       <h3 class="display">${p.n[lang]}</h3><p>${p.d[lang]}</p>
+       <div class="opts"><select id="o-${p.id}">${p.o.map((o,i)=>`<option value="${i}">${o[lang]} — ${fmt(o.p)}</option>`).join("")}</select></div>
+       <div class="row"><span class="price" id="pr-${p.id}">${fmt(p.o[0].p)}</span><button class="add" data-id="${p.id}">${t("add")}</button></div>
+     </div></article>`).join("");
+}
+function renderCart(){
+  const n=cart.reduce((a,c)=>a+c.q,0);$("#count").textContent=n;
+  if(!cart.length){$("#items").innerHTML=`<div class="empty"><img src="emblem-t.png" alt="" style="filter:brightness(.8)">${t("empty")}</div>`;$("#df").style.display="none";return}
+  $("#df").style.display="";
+  $("#items").innerHTML=cart.map((c,i)=>{const p=P.find(x=>x.id===c.id),o=p.o[c.o];return `
+   <div class="it">${p.img?`<img src="${p.img}" alt="">`:`<div class="ph"><img src="emblem-t.png" alt=""></div>`}
+    <div class="t"><b>${p.n[lang]}</b><span>${o[lang]} · ${fmt(o.p)}</span></div>
+    <div class="qty"><button data-i="${i}" data-d="-1">−</button><span>${c.q}</span><button data-i="${i}" data-d="1">+</button></div></div>`}).join("");
+  const sub=total(),d=DELIV[+$("#cArea").value||0];
+  $("#sub").textContent=fmt(sub);$("#del").textContent=fmt(d);$("#tot").textContent=fmt(sub+d);
+}
+function total(){return cart.reduce((a,c)=>a+P.find(x=>x.id===c.id).o[c.o].p*c.q,0)}
+function toast(m){const e=$("#toast");e.textContent=m;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1600)}
+function openCart(v){$("#drawer").classList.toggle("on",v);$("#ov").classList.toggle("on",v)}
+
+document.addEventListener("click",e=>{
+  const ch=e.target.closest(".chip");if(ch){filter=ch.dataset.c;renderFilters();renderGrid();return}
+  const ad=e.target.closest(".add");if(ad){const id=ad.dataset.id,o=+$("#o-"+id).value;const f=cart.find(c=>c.id===id&&c.o===o);f?f.q++:cart.push({id,o,q:1});save();renderCart();toast(t("added"));const b=$("#openCart");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");return}
+  const q=e.target.closest(".qty button");if(q){const i=+q.dataset.i;cart[i].q+=+q.dataset.d;if(cart[i].q<1)cart.splice(i,1);save();renderCart();return}
+});
+document.addEventListener("change",e=>{if(e.target.id&&e.target.id.startsWith("o-")){const id=e.target.id.slice(2),p=P.find(x=>x.id===id);$("#pr-"+id).textContent=fmt(p.o[+e.target.value].p)}if(e.target.id==="cArea")renderCart()});
+$("#lang").onclick=()=>{lang=lang==="ar"?"en":"ar";applyLang()};
+$("#openCart").onclick=()=>openCart(true);$("#closeCart").onclick=$("#ov").onclick=()=>openCart(false);
+$("#mClose").onclick=()=>$("#modal").classList.remove("on");
+$("#eventBtn").onclick=()=>{$("#mMsg").textContent=t("evMsg");$("#mWa").href=`https://wa.me/${WA}?text=${encodeURIComponent(t("evMsg"))}`;$("#modal").classList.add("on")};
+const dt=$("#cDate");const tm=new Date(Date.now()+864e5);dt.min=tm.toISOString().slice(0,10);
+$("#checkout").onclick=()=>{
+  const name=$("#cName").value.trim(),ph=$("#cPhone").value.trim();
+  if(!name||!ph){$("#err").textContent=t("errName");return}
+  if(!dt.value){$("#err").textContent=t("errDate");return}
+  $("#err").textContent="";
+  const ai=+$("#cArea").value,d=DELIV[ai],sub=total();
+  let m=`🧁 ${t("msgHead")}\n\n`;
+  cart.forEach(c=>{const p=P.find(x=>x.id===c.id),o=p.o[c.o];m+=`• ${p.n[lang]} (${o[lang]}) × ${c.q} = ${fmt(o.p*c.q)}\n`});
+  m+=`\n${t("sub")}: ${fmt(sub)}\n${t("del")}: ${fmt(d)}\n${t("tot")}: ${fmt(sub+d)}\n\n${t("mName")}: ${name}\n${t("mPhone")}: ${ph}\n${t("mArea")}: ${t("areas")[ai]}\n${t("mDate")}: ${dt.value}`;
+  const nt=$("#cNotes").value.trim();if(nt)m+=`\n${t("mNotes")}: ${nt}`;
+  $("#mMsg").textContent=m;$("#mWa").href=`https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+  openCart(false);$("#modal").classList.add("on");
+};
+applyLang();
+</script>
+</body>
+</html>
